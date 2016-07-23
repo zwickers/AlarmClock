@@ -1,7 +1,13 @@
 package justinzwick.alarmclock;
 
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,12 +33,42 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //finding the view instances from activity_main.xml
         dateButton = (ButtonRectangle) findViewById(R.id.dateButton);
         timeButton = (ButtonRectangle) findViewById(R.id.timeButton);
         alarmButton = (ButtonRectangle) findViewById(R.id.setAlarmButton);
         dateTextView = (TextView) findViewById(R.id.dateTextView);
         timeTextView = (TextView) findViewById(R.id.timeTextView);
+
+        // Show a timepicker when the timeButton is clicked
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        MainActivity.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false
+                );
+                tpd.vibrate(true);
+                tpd.dismissOnPause(true);
+                tpd.enableMinutes(true);
+                tpd.setTitle("Pick a Time :)");
+                tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        Log.d("TimePicker", "Dialog was cancelled");
+                    }
+                });
+                tpd.show(getFragmentManager(), "Timepickerdialog");
+            }
+        });
+
+
+
 
 
     }
