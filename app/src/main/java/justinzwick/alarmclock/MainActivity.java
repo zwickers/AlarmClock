@@ -66,7 +66,25 @@ public class MainActivity extends AppCompatActivity implements
                 tpd.show(getFragmentManager(), "Timepickerdialog");
             }
         });
-
+        // Show a datepicker when the dateButton is clicked
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        MainActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.vibrate(true);
+                dpd.dismissOnPause(true);
+                dpd.showYearPickerFirst(false);
+                dpd.setTitle("Pick a Date :)");
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+            }
+        });
 
 
 
