@@ -87,7 +87,12 @@ public class MainActivity extends AppCompatActivity implements
         });
 
 
+        alarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
 
     }
 
