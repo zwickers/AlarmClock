@@ -1,10 +1,12 @@
 package justinzwick.alarmclock;
 
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,6 +93,22 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
+
+                //TODO: make the notification create noise
+                //TODO: make the notification wait to appear until the time entered by the user has arrived
+                ///-----creates and issues a notification----///
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(MainActivity.this)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("My notification")
+                                .setContentText("Hello World!");
+                // Sets an ID for the notification
+                int mNotificationId = 001;
+                // Gets an instance of the NotificationManager service
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                // Builds the notification and issues it.
+                mNotifyMgr.notify(mNotificationId, mBuilder.build());
             }
         });
 
