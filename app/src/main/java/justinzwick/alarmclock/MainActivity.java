@@ -99,13 +99,13 @@ public class MainActivity extends AppCompatActivity implements
                 //TODO: change the noise to an alarm clock sound
                 //TODO: make the notification wait to appear until the time entered by the user has arrived
                 ///-----creates and issues a notification----///
-
+                Uri sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ring);
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(MainActivity.this)
                                 .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle("My notification")
                                 .setContentText("Hello World!")
-                                .setDefaults(Notification.DEFAULT_SOUND);
+                                .setSound(sound);
                 // Sets an ID for the notification
                 int mNotificationId = 001;
                 // Gets an instance of the NotificationManager service
