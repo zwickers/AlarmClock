@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-
+            startService(new Intent(MainActivity.this, AlarmService.class));
 
             }
         });
